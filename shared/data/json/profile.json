@@ -1,0 +1,126 @@
+{
+  "profile": {
+    "name": "Kevin",
+    "avatar": "https://github.com/paperdev.png",
+    "jobTitle": "Mobile game server developer",
+    "github": "https://github.com/paperdev",
+    "linkedin": "https://www.linkedin.com/in/paperdev",
+    "email": "paperdev0@gmail.com",
+    "following": 6,
+    "followers": 389,
+    "isOnline": true
+  },
+  "tags": [
+    {
+      "name": "Nodejs"
+    },
+    {
+      "name": "Typescript"
+    },
+    {
+      "name": "Game"
+    },
+    {
+      "name": "Server"
+    },
+    {
+      "name": "Backend"
+    },
+    {
+      "name": "AWS"
+    },
+    {
+      "name": "Nextjs"
+    }
+  ],
+  "summary": {
+    "contents": "I'm Kevin, a developer which has 9 years of experience in mobile game server development. Additionally, I am a fast learner and quick troubleshooter. I am capable of speaking fluent Korean, fluent Chineses and intermediate English. I will show you my best performance in working if you give me a chance to work with you. I have strong confidence that you won't be regret to work with me."
+  },
+  "history": [
+    {
+      "companyName": "Prunebomb(South Korea)",
+      "beginYear": 2022,
+      "beginMonth": 4,
+      "endYear": 2023,
+      "endMonth": 6,
+      "description": [
+        "Launched 3KM(https://play.google.com/store/apps/details?id=com.HDLabs.ThreeKingdomsMultiverse&hl=en_US) mobile game",
+        "Utilised Node.js with typescript as a backend web service.",
+        "Utilised Mysql and Redis as a database.",
+        "Utilised Github, Docker, AWS ECR/ECS.",
+        "Combined the game with blockchain NFT.",
+        "Configured and maintained Linux server on AWS."
+      ]
+    },
+    {
+      "companyName": "Blaster Games(South Korea)",
+      "beginYear": 2019,
+      "beginMonth": 4,
+      "endYear": 2021,
+      "endMonth": 6,
+      "description": [
+        "Developed mobile game server and admin web page.",
+        "Utilised Node.js with typescript as a backend web service.",
+        "Utilised Mysql, MongoDB and Redis as a database.",
+        "Utilised Artillery(Node.js) to do stress tests and Mocha(Node.js) to do units tests.",
+        "Configured and maintained Linux server with development environment."
+      ]
+    },
+    {
+      "companyName": "Iron Knight & FOX Games(South Korea)",
+      "beginYear": 2014,
+      "beginMonth": 5,
+      "endYear": 2017,
+      "endMonth": 8,
+      "description": [
+        "Launched Bumping Heroes(https://goo.gl/94gWKK) mobile game in Canada application market. And it runs with AWS, included EC2, Aurora, ElasticCache, SQS.",
+        "Launched Warigari three Musketeers(https://goo.gl/K2YdVE) mobile game in South Korea application market.",
+        "Developed mobile game server.",
+        "Utilised Node.js as a backend web service(Bumping Heroes).",
+        "Utilised Mysql and Redis as a database.",
+        "Utilised AWS SQS to transport logs and saved with Elasticsearch.",
+        "Utilised ngrinder(Jython) to do stress tests and mocha(Node.js) to do units tests.",
+        "Developed stress tool with C++(boost library).",
+        "Configured and maintained Redmine as an issue tracker.",
+        "Configured and maintained Jenkins as a CI system.",
+        "Configured and maintained Owncloud as a cloud file share system.",
+        "Configured and maintained Linux server with development environment."
+      ]
+    },
+    {
+      "companyName": "Saesol Soft(South Korea)",
+      "beginYear": 2014,
+      "beginMonth": 51,
+      "endYear": 2014,
+      "endMonth": 4,
+      "description": [
+        "Maintained Linux and Oracle server in IDC.",
+        "Supported developer to develop fluently."
+      ]
+    },
+    {
+      "companyName": "NSE Entertainment(South Korea)",
+      "beginYear": 2013,
+      "beginMonth": 3,
+      "endYear": 2013,
+      "endMonth": 12,
+      "description": [
+        "Maintained game server under Linux.",
+        "Developed mobile game server with unity uLink network module.",
+        "Developed game admin website with php and Mysql.",
+        "Developed stress tool with C#(uLink library)."
+      ]
+    },
+    {
+      "companyName": "SK C&C Shenyang(China)",
+      "beginYear": 2013,
+      "beginMonth": 3,
+      "endYear": 2013,
+      "endMonth": 12,
+      "description": [
+        "Maintained Linux server.",
+        "Developed Android application backend server."
+      ]
+    }
+  ]
+}

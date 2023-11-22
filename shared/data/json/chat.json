@@ -1,0 +1,37 @@
+[
+  {
+    "avatar": "",
+    "name": "Admin",
+    "text": "How can I help you?",
+    "time": "2020-1-1",
+    "isSender": false
+  },
+  {
+    "avatar": "",
+    "name": "Anonymous",
+    "text": "Hello world!",
+    "time": "2020-1-1",
+    "isSender": true
+  },
+  {
+    "avatar": "",
+    "name": "Admin",
+    "text": "Hello world again!",
+    "time": "2020-1-1",
+    "isSender": false
+  },
+  {
+    "avatar": "",
+    "name": "Anonymous",
+    "text": "Hello world?",
+    "time": "2020-1-1",
+    "isSender": true
+  },
+  {
+    "avatar": "",
+    "name": "Admin",
+    "text": "Hello world again?",
+    "time": "2020-1-1",
+    "isSender": false
+  }
+]
