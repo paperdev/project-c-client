@@ -65,6 +65,15 @@ export default function Header({
     router.push(URL_PROFILE);
   }
 
+  const onClickProfileMenu = (event: React.MouseEvent) => {
+    if (!event || !event.currentTarget) {
+      return;
+    }
+    if ('help' === event.currentTarget.innerHTML.toLocaleLowerCase()) {
+      router.push('youtube');
+    }
+  }
+
   return (
     <>
       <Navbar onMenuOpenChange={setIsMenuOpen}>
@@ -114,7 +123,7 @@ export default function Header({
                       </>
                       :
                       <>
-                        <div className={index === profileMenuItems.length - 1 ? 'text-danger-500' : 'text-foreground-500'}>{item}</div>
+                        <div onClick={(event: React.MouseEvent) => { onClickProfileMenu(event); }} className={index === profileMenuItems.length - 1 ? 'text-danger-500' : 'text-foreground-500'}>{item}</div>
                       </>
                   }
                 </DropdownItem>
