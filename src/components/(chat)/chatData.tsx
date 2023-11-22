@@ -72,9 +72,10 @@ export default function ComponentChatData({
             )
           })
         }
+        <div id='chatBottomDiv'></div>
       </ScrollShadow>
 
-      <div className='sticky bottom-0 bg-background'>
+      <div className='sticky bottom-0 bg-background' >
         <ComponentChatInput onSendText={(onSendText)}/>
       </div>
     </>

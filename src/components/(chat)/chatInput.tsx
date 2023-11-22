@@ -1,8 +1,9 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-import { Input, Button } from '@nextui-org/react';
+import { Input, Button, Link } from '@nextui-org/react';
 import { iChatData } from '@/shared/interface/chat';
+import { useRouter } from 'next/navigation';
 
 const nameSender = 'Guest';
 
@@ -18,6 +19,7 @@ export default function ComponentChatInput({
   onSendText: Function,
 }) {
   const inputChatRef = useRef(null);
+  const router = useRouter();
 
   const resetInputChat = () => {
     inputChatRef.current.value = '';
@@ -62,18 +64,22 @@ export default function ComponentChatInput({
       }
     );
 
-    const resBody: iChatData  = await res.json();
-    await onSendText([sendBody, resBody]);
+    const resBody: iChatData = await res.json();
+    onSendText([sendBody, resBody]);
 
-    scrollToBottom(ScoollHevavior.smooth);
+    router.replace('#chatBottomDiv', { scroll: true });
+
+    // scrollToBottom(ScoollHevavior.smooth);
   }
 
   useEffect(() => {
-    scrollToBottom(ScoollHevavior.instant);
+    // scrollToBottom(ScoollHevavior.instant);
+    router.replace('#chatBottomDiv', { scroll: true });
   });
 
   const scrollToBottom = (behavior: ScrollBehavior) => {
     const chatBottomDiv = document.getElementById('chatBottomDiv');
+
     if (!chatBottomDiv) {
       return;
     }
