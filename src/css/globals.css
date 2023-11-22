@@ -4,7 +4,7 @@
 
 @layer components {
   .paper-default-view {
-    @apply max-w-2xl flex flex-col mx-auto h-screen
+    @apply max-w-2xl flex flex-col mx-auto max-h-screen
   }
 
   .paper-body {

@@ -1,5 +1,4 @@
 import { nextui } from '@nextui-org/react';
-import { HideScroll } from './src/plugins/scroll';
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -22,7 +21,6 @@ module.exports = {
   },
   darkMode: 'class',
   plugins: [
-    HideScroll,
     // NOTE: https://nextui.org/docs/frameworks/nextjs
     nextui({
       prefix: 'nextui', // prefix for themes variables

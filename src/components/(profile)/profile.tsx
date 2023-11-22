@@ -1,11 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Avatar, Link, Button, Popover, PopoverTrigger, PopoverContent } from '@nextui-org/react';
-import { toast, ToastContainer } from 'react-toastify';
+import { Avatar, Link, Popover, PopoverTrigger, PopoverContent } from '@nextui-org/react';
 import { LuGithub, LuMail, LuLinkedin } from 'react-icons/lu';
 import { iProfile } from '@/shared/interface/profile';
-import 'react-toastify/dist/ReactToastify.css';
 
 export default function ComponentProfile({
   dataProfile
@@ -83,7 +81,6 @@ export default function ComponentProfile({
               </Popover>
             </div>
 
-            <ToastContainer />
           </div>
         </div>
       </div>
