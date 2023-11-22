@@ -8,7 +8,6 @@ async function getPostList() {
       headers: {
         'Content-type': 'application/json;',
       },
-      cache: 'no-cache'
     }
   );
 

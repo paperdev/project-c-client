@@ -15,7 +15,7 @@ export default function TemplateHome({
         <Body>
           {children}
         </Body>
-        <Footer/>
+        {/* <Footer/> */}
       </div>
     </>
   );

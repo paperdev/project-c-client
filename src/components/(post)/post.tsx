@@ -65,8 +65,6 @@ export default function ComponentPost({
       divLikeButtonAni.classList.add('invisible');
       divLikeButtonAni.classList.remove('animate__animated', 'animate__fadeOutUp');
     });
-
-    router.refresh();
   }
 
   return (

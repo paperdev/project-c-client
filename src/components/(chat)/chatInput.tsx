@@ -2,7 +2,6 @@
 
 import React, { useEffect, useRef } from 'react';
 import { Input, Button } from '@nextui-org/react';
-import { useRouter } from 'next/navigation';
 
 const nameSender = 'Anonymous';
 
@@ -14,7 +13,6 @@ const ScoollHevavior: Record<string, ScrollBehavior> = {
 
 export default function ComponentChatInput() {
   const inputChatRef = useRef(null);
-  const router = useRouter();
 
   const resetInputChat = () => {
     inputChatRef.current.value = '';
@@ -59,7 +57,7 @@ export default function ComponentChatInput() {
         )
       }
     );
-    router.refresh();
+
     scrollToBottom(ScoollHevavior.smooth);
   }
 

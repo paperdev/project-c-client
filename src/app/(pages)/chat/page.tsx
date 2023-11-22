@@ -8,7 +8,6 @@ async function getChatList() {
       headers: {
         'Content-type': 'application/json;',
       },
-      cache: 'no-cache'
     }
   );
  
@@ -24,13 +23,7 @@ export default async function Page() {
 
   return(
     <>
-      {
-        chatList.map((chatData: iChatData, index: number) => {
-          return (
-            <ComponentChatData key={index} chatData={chatData} />
-          )
-        })
-      }
+      <ComponentChatData chatList={chatList} />
     </>
   )
 }
