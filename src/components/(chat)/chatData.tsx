@@ -24,17 +24,21 @@ export default function ComponentChatData({
 }: {
   chatList: iChatData[],
 }) {
-  const [recentChat, setRecentChat] = useState(chatList);
+  const [recentChatList, setRecentChatList] = useState(chatList);
 
   useEffect(() => {
-    setRecentChat(chatList);
+    setRecentChatList(chatList);
   }, [chatList]);
+
+  const onSendText = (resChatData: iChatData[]) => {
+    setRecentChatList(recentChatList.concat(resChatData));
+  }
 
   return (
     <>
       <ScrollShadow hideScrollBar className='h-screen'>
         {
-          recentChat.map((chatData: iChatData, index: number) => {
+          recentChatList.map((chatData: iChatData, index: number) => {
             return (
               <div key={index} className={`flex ${chatData.isSender ? 'justify-end' : 'justify-start'}`}>
                 <div className='mt-7'>
@@ -71,7 +75,7 @@ export default function ComponentChatData({
       </ScrollShadow>
 
       <div className='sticky bottom-0 bg-background'>
-        <ComponentChatInput />
+        <ComponentChatInput onSendText={(onSendText)}/>
       </div>
     </>
   )

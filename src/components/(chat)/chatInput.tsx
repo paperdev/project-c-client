@@ -2,8 +2,9 @@
 
 import React, { useEffect, useRef } from 'react';
 import { Input, Button } from '@nextui-org/react';
+import { iChatData } from '@/shared/interface/chat';
 
-const nameSender = 'Anonymous';
+const nameSender = 'Guest';
 
 const ScoollHevavior: Record<string, ScrollBehavior> = {
   smooth: 'smooth',
@@ -11,7 +12,11 @@ const ScoollHevavior: Record<string, ScrollBehavior> = {
   auto: 'auto',
 }
 
-export default function ComponentChatInput() {
+export default function ComponentChatInput({
+  onSendText
+}: {
+  onSendText: Function,
+}) {
   const inputChatRef = useRef(null);
 
   const resetInputChat = () => {
@@ -40,23 +45,25 @@ export default function ComponentChatInput() {
   }
 
   const sendText = async (text: string) => {
-    await fetch(process.env.CHAT_URL,
+    const sendBody: iChatData = {
+      avatar: '',
+      name: nameSender,
+      text: text,
+      time: '',
+      isSender: true,
+    };
+    const res = await fetch(process.env.CHAT_URL,
       {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(
-          {
-            avatar: '',
-            name: nameSender,
-            text: text,
-            time: '',
-            isSender: true,
-          }
-        )
+        body: JSON.stringify(sendBody)
       }
     );
+
+    const resBody: iChatData  = await res.json();
+    await onSendText([sendBody, resBody]);
 
     scrollToBottom(ScoollHevavior.smooth);
   }
