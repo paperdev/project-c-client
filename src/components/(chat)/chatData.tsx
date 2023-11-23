@@ -1,12 +1,10 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Input, Button, Avatar, Popover, PopoverTrigger, PopoverContent } from '@nextui-org/react';
+import { Input, Avatar, Popover, PopoverTrigger, PopoverContent, Button, Listbox, ListboxItem } from '@nextui-org/react';
 import { iChatData } from '@/shared/interface/chat';
 import ProfileAvatar from '@/components/(profile)/profileAvatar';
 import dataProfile from '@/shared/data/json/profile.json'; // TODO:
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
 
 const guestProfile = {
   'name': 'Guest',
@@ -99,46 +97,47 @@ export default function ComponentChatData({
 
   return (
     <>
-      <List>
+      <Listbox variant='light' aria-label='chatListBox'>
         {
           recentChatList.map((chatData: iChatData, index: number) => {
             return (
-              <ListItem
-                key={index}
-                className={`flex ${chatData.isSender ? 'justify-end' : 'justify-start'} gap-2`}
-              >
-                <div>
-                  <Popover showArrow placement='top-start'>
-                    <PopoverTrigger>
-                      <Avatar
-                        radius='full'
-                        size='sm'
-                        showFallback
-                        src={chatData.isSender ? chatData.avatar : dataProfile.profile.avatar}
-                        className={`cursor-pointer`}
-                      >
-                      </Avatar>
-                    </PopoverTrigger>
-                    <PopoverContent className='p-1'>
-                      <ProfileAvatar isGuest={chatData.isSender} dataProfile={chatData.isSender ? guestProfile : dataProfile.profile} />
-                    </PopoverContent>
-                  </Popover>
-                </div>
+              <ListboxItem key={index} textValue={index.toString()}>
+                <div className={`flex ${chatData.isSender ? 'justify-end' : 'justify-start'} gap-2`}>
 
-                <div>
-                  <Input
-                    label={chatData.name}
-                    labelPlacement='outside'
-                    isReadOnly
-                    value={chatData.text}
-                    description={chatData.time}
-                  />
+                  <div>
+                    <Popover showArrow placement='top-start'>
+                      <PopoverTrigger>
+                        <Avatar
+                          radius='full'
+                          size='sm'
+                          showFallback
+                          src={chatData.isSender ? chatData.avatar : dataProfile.profile.avatar}
+                          className={`cursor-pointer`}
+                        >
+                        </Avatar>
+                      </PopoverTrigger>
+                      <PopoverContent className='p-1'>
+                        <ProfileAvatar isGuest={chatData.isSender} dataProfile={chatData.isSender ? guestProfile : dataProfile.profile} />
+                      </PopoverContent>
+                    </Popover>
+                  </div>
+
+                  <div>
+                    <Input
+                      label={chatData.name}
+                      labelPlacement='outside'
+                      isReadOnly
+                      value={chatData.text}
+                      description={chatData.time}
+                    />
+                  </div>
+
                 </div>
-              </ListItem>
+              </ListboxItem>
             )
           })
         }
-      </List>
+      </Listbox>
 
       <div className='sticky bottom-0 bg-background backdrop-blur-0 z-30'>
         <Input
