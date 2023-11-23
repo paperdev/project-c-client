@@ -6,7 +6,6 @@ import ComponentComment from '@/components/(post)/comment';
 import ComponentPostInput from '@/components/(post)/postInput';
 import ComponentPostImage from '@/components/(post)/postImage';
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { Card, CardHeader, CardBody, CardFooter, Chip, Divider } from '@nextui-org/react';
 
 export default function ComponentPost({
@@ -19,7 +18,6 @@ export default function ComponentPost({
   const maxNumber = 100;
 
   const [dataComments, setDataComments] = useState([]);
-  const router = useRouter();
 
   const onClickComment = (event: React.MouseEvent, comments: iComment[]) => {
     const commentsElement = event.currentTarget.parentElement.parentElement.parentElement.parentElement.getElementsByClassName('commentListClass')[0];
