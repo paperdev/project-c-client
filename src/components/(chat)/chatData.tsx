@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Input, Avatar, Popover, PopoverTrigger, PopoverContent, Button, Listbox, ListboxItem } from '@nextui-org/react';
+import { Input, Avatar, Popover, PopoverTrigger, PopoverContent, Button, Listbox, ListboxItem, Textarea, Spinner } from '@nextui-org/react';
 import { iChatData } from '@/shared/interface/chat';
 import ProfileAvatar from '@/components/(profile)/profileAvatar';
 import dataProfile from '@/shared/data/json/profile.json'; // TODO:
@@ -30,6 +30,7 @@ export default function ComponentChatData({
   chatList: iChatData[],
 }) {
   const [recentChatList, setRecentChatList] = useState(chatList);
+  const [isLoading, setIsLoading] = useState(false);
   const inputChatRef = useRef(null);
   const chatListBottomRef = useRef(null);
 
@@ -73,6 +74,12 @@ export default function ComponentChatData({
   }
 
   const sendText = async (text: string) => {
+    if (isLoading) {
+      return;
+    }
+
+    resetInputChat();
+
     const sendBody: iChatData = {
       avatar: guestProfile.avatar,
       name: guestProfile.name,
@@ -80,6 +87,21 @@ export default function ComponentChatData({
       time: '',
       isSender: true,
     };
+    let newChatList = recentChatList.concat([sendBody]);
+    setRecentChatList(newChatList);
+    setIsLoading(true);
+
+
+    const loadingBody: iChatData = {
+      avatar: dataProfile.profile.avatar,
+      name: dataProfile.profile.name,
+      text: text,
+      time: '',
+      isSender: false,
+    };
+
+    setRecentChatList([...newChatList, loadingBody]);
+
     const res = await fetch(process.env.CHAT_URL,
       {
         method: 'POST',
@@ -89,10 +111,10 @@ export default function ComponentChatData({
         body: JSON.stringify(sendBody)
       }
     );
-
     const resBody: iChatData = await res.json();
-    setRecentChatList(recentChatList.concat([sendBody, resBody]));
-    resetInputChat();
+    newChatList = newChatList.concat([resBody]);
+    setRecentChatList(newChatList);
+    setIsLoading(false);
   }
 
   return (
@@ -109,9 +131,9 @@ export default function ComponentChatData({
                   key={index}
                   textValue={index.toString()}
                 >
-                  <div className={`flex ${chatData.isSender ? 'justify-end' : 'justify-start'} gap-2`}>
+                  <div className={`flex items-center ${chatData.isSender ? 'justify-end' : 'justify-start'} gap-2`}>
 
-                    <div className='mt-7'>
+                    <div>
                       <Popover showArrow placement='top-start'>
                         <PopoverTrigger>
                           <Avatar
@@ -129,15 +151,21 @@ export default function ComponentChatData({
                       </Popover>
                     </div>
 
-                    <div>
-                      <Input
-                        label={chatData.name}
-                        labelPlacement='outside'
-                        isReadOnly
-                        value={chatData.text}
-                        description={chatData.time}
-                      />
-                    </div>
+                    {
+                      isLoading && !chatData.isSender && (index === recentChatList.length - 1)
+                        ? <Spinner size="md" />
+                        :
+                        <div className='w-1/2'>
+                          <Textarea
+                            minRows={1}
+                            label={chatData.name}
+                            labelPlacement='outside'
+                            isReadOnly
+                            value={chatData.text}
+                            description={chatData.time}
+                          />
+                        </div>
+                    }
                   </div>
                 </ListboxItem>
 
