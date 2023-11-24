@@ -31,7 +31,7 @@ export default function ComponentChatData({
 }) {
   const [recentChatList, setRecentChatList] = useState(chatList);
   const inputChatRef = useRef(null);
-  const chatListRef = useRef(null);
+  const chatListBottomRef = useRef(null);
 
   const resetInputChat = () => {
     inputChatRef.current.value = '';
@@ -42,17 +42,17 @@ export default function ComponentChatData({
   }, [recentChatList.length]);
 
   const scrollToBottom = (behavior: ScrollBehavior) => {
-    if (!chatListRef.current) {
+    if (!chatListBottomRef.current) {
       return;
     }
-    chatListRef.current.scrollIntoView({ behavior: behavior, block: 'end', inline: 'nearest' });
+    chatListBottomRef.current.scrollIntoView({ behavior: behavior, block: 'end', inline: 'nearest' });
   }
 
   const scrollToTop = (behavior: ScrollBehavior) => {
-    if (!chatListRef.current) {
+    if (!chatListBottomRef.current) {
       return;
     }
-    chatListRef.current.scrollIntoView({ behavior: behavior, block: 'start', inline: 'nearest' });
+    chatListBottomRef.current.scrollIntoView({ behavior: behavior, block: 'start', inline: 'nearest' });
   }
 
   const checkKeyDown = (event: React.KeyboardEvent) => {
@@ -97,47 +97,54 @@ export default function ComponentChatData({
 
   return (
     <>
-      <Listbox variant='light' aria-label='chatListBox'>
-        {
-          recentChatList.map((chatData: iChatData, index: number) => {
-            return (
-              <ListboxItem key={index} textValue={index.toString()}>
-                <div className={`flex ${chatData.isSender ? 'justify-end' : 'justify-start'} gap-2`}>
+        <Listbox
+          className='min-h-screen'
+          variant='light'
+          aria-label='chatListBox'
+        >
+          {
+            recentChatList.map((chatData: iChatData, index: number) => {
+              return (
+                <ListboxItem
+                  key={index}
+                  textValue={index.toString()}
+                >
+                  <div className={`flex ${chatData.isSender ? 'justify-end' : 'justify-start'} gap-2`}>
 
-                  <div>
-                    <Popover showArrow placement='top-start'>
-                      <PopoverTrigger>
-                        <Avatar
-                          radius='full'
-                          size='sm'
-                          showFallback
-                          src={chatData.isSender ? chatData.avatar : dataProfile.profile.avatar}
-                          className={`cursor-pointer`}
-                        >
-                        </Avatar>
-                      </PopoverTrigger>
-                      <PopoverContent className='p-1'>
-                        <ProfileAvatar isGuest={chatData.isSender} dataProfile={chatData.isSender ? guestProfile : dataProfile.profile} />
-                      </PopoverContent>
-                    </Popover>
+                    <div className='mt-7'>
+                      <Popover showArrow placement='top-start'>
+                        <PopoverTrigger>
+                          <Avatar
+                            radius='full'
+                            size='sm'
+                            showFallback
+                            src={chatData.isSender ? chatData.avatar : dataProfile.profile.avatar}
+                            className={`cursor-pointer`}
+                          >
+                          </Avatar>
+                        </PopoverTrigger>
+                        <PopoverContent className='p-1'>
+                          <ProfileAvatar isGuest={chatData.isSender} dataProfile={chatData.isSender ? guestProfile : dataProfile.profile} />
+                        </PopoverContent>
+                      </Popover>
+                    </div>
+
+                    <div>
+                      <Input
+                        label={chatData.name}
+                        labelPlacement='outside'
+                        isReadOnly
+                        value={chatData.text}
+                        description={chatData.time}
+                      />
+                    </div>
                   </div>
+                </ListboxItem>
 
-                  <div>
-                    <Input
-                      label={chatData.name}
-                      labelPlacement='outside'
-                      isReadOnly
-                      value={chatData.text}
-                      description={chatData.time}
-                    />
-                  </div>
-
-                </div>
-              </ListboxItem>
-            )
-          })
-        }
-      </Listbox>
+              )
+            })
+          }
+        </Listbox>
 
       <div className='sticky bottom-0 bg-background backdrop-blur-0 z-30'>
         <Input
@@ -157,7 +164,7 @@ export default function ComponentChatData({
         />
       </div>
 
-      <div ref={chatListRef}></div>
+      <div ref={chatListBottomRef}></div>
     </>
   )
 }
