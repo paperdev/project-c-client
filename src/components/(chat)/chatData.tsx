@@ -33,13 +33,19 @@ export default function ComponentChatData({
   const [isLoading, setIsLoading] = useState(false);
   const inputChatRef = useRef(null);
   const chatListBottomRef = useRef(null);
+  const chatListTopRef = useRef(null);
 
   const resetInputChat = () => {
     inputChatRef.current.value = '';
   }
 
   useEffect(() => {
-    scrollToBottom(ScoollHevavior.instant);
+    if (2 >= recentChatList.length) {
+      scrollToTop(ScoollHevavior.instant);
+    }
+    else {
+      scrollToBottom(ScoollHevavior.instant);
+    }
   }, [recentChatList.length]);
 
   const scrollToBottom = (behavior: ScrollBehavior) => {
@@ -50,10 +56,10 @@ export default function ComponentChatData({
   }
 
   const scrollToTop = (behavior: ScrollBehavior) => {
-    if (!chatListBottomRef.current) {
+    if (!chatListTopRef.current) {
       return;
     }
-    chatListBottomRef.current.scrollIntoView({ behavior: behavior, block: 'start', inline: 'nearest' });
+    chatListTopRef.current.scrollIntoView({ behavior: behavior, block: 'start', inline: 'nearest' });
   }
 
   const checkKeyDown = (event: React.KeyboardEvent) => {
@@ -119,60 +125,61 @@ export default function ComponentChatData({
 
   return (
     <>
-        <Listbox
-          className='min-h-screen'
-          variant='light'
-          aria-label='chatListBox'
-        >
-          {
-            recentChatList.map((chatData: iChatData, index: number) => {
-              return (
-                <ListboxItem
-                  key={index}
-                  textValue={index.toString()}
-                >
-                  <div className={`flex items-center ${chatData.isSender ? 'justify-end' : 'justify-start'} gap-2`}>
+      <div ref={chatListTopRef}></div>
+      <Listbox
+        className='min-h-screen'
+        variant='light'
+        aria-label='chatListBox'
+      >
+        {
+          recentChatList.map((chatData: iChatData, index: number) => {
+            return (
+              <ListboxItem
+                key={index}
+                textValue={index.toString()}
+              >
+                <div className={`flex items-center ${chatData.isSender ? 'justify-end' : 'justify-start'} gap-2`}>
 
-                    <div>
-                      <Popover showArrow placement='top-start'>
-                        <PopoverTrigger>
-                          <Avatar
-                            radius='full'
-                            size='sm'
-                            showFallback
-                            src={chatData.isSender ? chatData.avatar : dataProfile.profile.avatar}
-                            className={`cursor-pointer`}
-                          >
-                          </Avatar>
-                        </PopoverTrigger>
-                        <PopoverContent className='p-1'>
-                          <ProfileAvatar isGuest={chatData.isSender} dataProfile={chatData.isSender ? guestProfile : dataProfile.profile} />
-                        </PopoverContent>
-                      </Popover>
-                    </div>
-
-                    {
-                      isLoading && !chatData.isSender && (index === recentChatList.length - 1)
-                        ? <Spinner size="md" />
-                        :
-                        <div className='w-1/2'>
-                          <Textarea
-                            minRows={1}
-                            label={chatData.name}
-                            labelPlacement='outside'
-                            isReadOnly
-                            value={chatData.text}
-                            description={chatData.time}
-                          />
-                        </div>
-                    }
+                  <div>
+                    <Popover showArrow placement='top-start'>
+                      <PopoverTrigger>
+                        <Avatar
+                          radius='full'
+                          size='sm'
+                          showFallback
+                          src={chatData.isSender ? chatData.avatar : dataProfile.profile.avatar}
+                          className={`cursor-pointer`}
+                        >
+                        </Avatar>
+                      </PopoverTrigger>
+                      <PopoverContent className='p-1'>
+                        <ProfileAvatar isGuest={chatData.isSender} dataProfile={chatData.isSender ? guestProfile : dataProfile.profile} />
+                      </PopoverContent>
+                    </Popover>
                   </div>
-                </ListboxItem>
 
-              )
-            })
-          }
-        </Listbox>
+                  {
+                    isLoading && !chatData.isSender && (index === recentChatList.length - 1)
+                      ? <Spinner size="md" />
+                      :
+                      <div className='w-1/2'>
+                        <Textarea
+                          minRows={1}
+                          label={chatData.name}
+                          labelPlacement='outside'
+                          isReadOnly
+                          value={chatData.text}
+                          description={chatData.time}
+                        />
+                      </div>
+                  }
+                </div>
+              </ListboxItem>
+
+            )
+          })
+        }
+      </Listbox>
 
       <div className='sticky bottom-0 bg-background backdrop-blur-0 z-30'>
         <Input
