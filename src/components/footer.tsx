@@ -48,14 +48,15 @@ export default function Footer() {
           radius='md'
           variant='light'
           fullWidth={true}
-          className='flex justify-center'
+          className='flex justify-center h-16'
           onSelectionChange={onSelectionChange}
         >
           {pageMenuItems.map((item) => (
             <Tab
               key={item.name}
+              className='h-14'
               title={
-                <div className="flex items-center gap-2">
+                <div className='flex items-center gap-2'>
                   {item.icon}
                   <div>{item.name}</div>
                 </div>
