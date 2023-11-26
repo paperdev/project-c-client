@@ -43,7 +43,7 @@ export default function Footer() {
     <>
       <Paper elevation={2}>
         <Tabs
-          selectedKey={currentMenuName}
+                  selectedKey={currentMenuName}
           color='secondary'
           radius='md'
           variant='light'
@@ -56,7 +56,7 @@ export default function Footer() {
               key={item.name}
               className='h-14'
               title={
-                <div className='flex items-center gap-2'>
+                <div className='flex items-center gap-2 font-bold text-base'>
                   {item.icon}
                   <div>{item.name}</div>
                 </div>

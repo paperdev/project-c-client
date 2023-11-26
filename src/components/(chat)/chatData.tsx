@@ -199,7 +199,7 @@ export default function ComponentChatData({
         />
       </div>
 
-      <div ref={chatListBottomRef}></div>
+      <div ref={chatListBottomRef} className='invisible'></div>
     </>
   )
 }

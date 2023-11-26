@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Avatar, Link, Popover, PopoverTrigger, PopoverContent, Button } from '@nextui-org/react';
+import { Avatar, Link } from '@nextui-org/react';
 import { LuGithub, LuMail, LuLinkedin } from 'react-icons/lu';
 import { iProfile } from '@/shared/interface/profile';
 import Snackbar from '@mui/material/Snackbar';
@@ -17,7 +17,7 @@ export default function ComponentProfile({
 
   const copyText = (text: string) => {
     navigator.clipboard.writeText(text);
-  
+
     if (isOpen) {
       return;
     }
@@ -71,35 +71,20 @@ export default function ComponentProfile({
               >
               </Link>
 
-              {/* <Button onClick={handleClick}>Open simple snackbar</Button> */}
               <div className='cursor-pointer text-secondary' onClick={() => { copyText(dataProfile.email) }}>
-                    <LuMail className='w-6 h-6' />
-                  </div>
+                <LuMail className='w-6 h-6' />
+              </div>
               <Snackbar
                 open={isOpen}
                 autoHideDuration={delayTime}
                 onClose={onClose}
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'center'  }}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
               >
                 <Alert onClose={onClose} severity='success' variant='filled' >
-                Email is copied!
+                  Email is copied!
                 </Alert>
               </Snackbar>
 
-              {/* <Popover placement='right' color='success' showArrow={true} isOpen={isOpen} >
-                <PopoverTrigger>
-                  <div className='cursor-pointer text-secondary' onClick={() => { copyText(dataProfile.email) }}>
-                    <LuMail className='w-6 h-6' />
-                  </div>
-                  
-                </PopoverTrigger>
-                <PopoverContent>
-                  {
-                    isOpen && 
-                      <div className='p-1 text-secondary-500 text-md'>Email is copied!</div>
-                  }
-                </PopoverContent>
-              </Popover> */}
             </div>
 
           </div>
