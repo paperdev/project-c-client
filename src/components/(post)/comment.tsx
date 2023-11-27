@@ -2,24 +2,24 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { Input, Button, Avatar, Popover, PopoverTrigger, PopoverContent } from '@nextui-org/react';
-import { useRouter } from 'next/navigation';
 import ProfileAvatar from '@/components/(profile)/profileAvatar';
 import { iComment } from '@/shared/interface/post';
 import dataProfile from '@/shared/data/json/profile.json'; // TODO:
 
 export default function ComponentComment({
   postId,
-  dataComments
+  dataComments,
+  onCommentReplied
 }: {
   postId: number,
   dataComments: iComment[],
+  onCommentReplied: Function,
 }) {
   const iconWeight = 'w-6';
   const iconHeight = 'h-6';
 
   const inputCommentRef = useRef(null);
   const [recentComments, setRecentComments] = useState(dataComments);
-  const router = useRouter();
 
   useEffect(() => {
     setRecentComments(dataComments);
@@ -29,7 +29,7 @@ export default function ComponentComment({
     const comment: iComment = {
       postId: postId,
       userId: 1,
-      id: recentComments.length,
+      id: recentComments.length + 1,
       avatarSrc: dataProfile.profile.avatar,
       time: Date.now().toString(),
       text: commentText
@@ -50,6 +50,8 @@ export default function ComponentComment({
     );
 
     setRecentComments([comment, ...recentComments]);
+
+    onCommentReplied(comment);
   }
 
   const resetInputComment = () => {
