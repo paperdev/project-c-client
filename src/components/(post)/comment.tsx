@@ -50,8 +50,6 @@ export default function ComponentComment({
     );
 
     setRecentComments([comment, ...recentComments]);
-
-    router.refresh();
   }
 
   const resetInputComment = () => {

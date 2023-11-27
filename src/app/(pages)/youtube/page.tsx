@@ -9,7 +9,6 @@ async function getYoutubeList() {
       headers: {
         'Content-type': 'application/json;',
       },
-      cache: 'no-cache'
     }
   );
 

@@ -3,6 +3,7 @@ import Body from '@/components/body';
 import Footer from '@/components/footer';
 
 const PageTitle = 'Welcome';
+
 export default function TemplateHome({
   children,
 }: {

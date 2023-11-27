@@ -5,9 +5,7 @@ export default function Layout({
 }) {
   return (
     <>
-      <div id='chatBottomDiv'>
-        {children}
-      </div>
+      {children}
     </>
   );
 }

@@ -1,11 +1,11 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Avatar, Link, Button, Popover, PopoverTrigger, PopoverContent } from '@nextui-org/react';
-import { toast, ToastContainer } from 'react-toastify';
+import { Avatar, Link } from '@nextui-org/react';
 import { LuGithub, LuMail, LuLinkedin } from 'react-icons/lu';
 import { iProfile } from '@/shared/interface/profile';
-import 'react-toastify/dist/ReactToastify.css';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 export default function ComponentProfile({
   dataProfile
@@ -17,17 +17,21 @@ export default function ComponentProfile({
 
   const copyText = (text: string) => {
     navigator.clipboard.writeText(text);
-  
+
     if (isOpen) {
       return;
     }
 
     setIsOpen(true);
-
-    setTimeout(() => {
-      setIsOpen(false);
-    }, delayTime)
   }
+
+  const onClose = (event: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setIsOpen(false);
+  };
 
   return (
     <>
@@ -67,23 +71,22 @@ export default function ComponentProfile({
               >
               </Link>
 
-              <Popover placement='right' color='success' showArrow={true} isOpen={isOpen} >
-                <PopoverTrigger>
-                  <div className='cursor-pointer text-secondary' onClick={() => { copyText(dataProfile.email) }}>
-                    <LuMail className='w-6 h-6' />
-                  </div>
-                  
-                </PopoverTrigger>
-                <PopoverContent>
-                  {
-                    isOpen && 
-                      <div className='p-1 text-secondary-500 text-md'>Email is copied!</div>
-                  }
-                </PopoverContent>
-              </Popover>
+              <div className='cursor-pointer text-secondary' onClick={() => { copyText(dataProfile.email) }}>
+                <LuMail className='w-6 h-6' />
+              </div>
+              <Snackbar
+                open={isOpen}
+                autoHideDuration={delayTime}
+                onClose={onClose}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+              >
+                <Alert onClose={onClose} severity='success' variant='filled' >
+                  Email is copied!
+                </Alert>
+              </Snackbar>
+
             </div>
 
-            <ToastContainer />
           </div>
         </div>
       </div>

@@ -1,19 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Navbar, NavbarBrand, NavbarContent, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar, User, Link } from '@nextui-org/react';
-import { usePathname, useRouter } from 'next/navigation';
+import React from 'react';
+import { Navbar, NavbarBrand, NavbarContent, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar, User } from '@nextui-org/react';
+import { useRouter, usePathname } from 'next/navigation';
 import SubHeader from '@/components/subHeader';
 import dataProfile from '@/shared/data/json/profile.json';
 import { ThemeSwitcher } from './ThemeSwitcher';
-
-// TODO:
-const pageMenuItems = [
-  'Home',
-  'Chat',
-  'Post',
-  'Stats',
-];
+import { LuGhost } from 'react-icons/lu';
+import Paper from '@mui/material/Paper';
 
 // TODO:
 const profileMenuItems = [
@@ -26,40 +20,14 @@ const profileMenuItems = [
 
 const URL_PROFILE = '/home';
 
-function PageMenu({
-  pageMenuItems,
-}: {
-  pageMenuItems: string[],
-}) {
-  const currentUrl = usePathname();
-  const currentMenuName = currentUrl.charAt(1).toLocaleUpperCase() + currentUrl.slice(2);
-
-  return (
-    <>
-      {pageMenuItems.map((item: string, index: number) => (
-        <NavbarMenuItem key={`${item}-${index}`}>
-          <Link
-            underline={currentMenuName === item ? 'always' : 'none'}
-            color={currentMenuName === item ? 'secondary' : 'foreground'}
-            className={`w-full ${currentMenuName === item ? 'font-bold' : ''}`}
-            href={item.toLocaleLowerCase()}
-            size='lg'
-          >
-            {item}
-          </Link>
-        </NavbarMenuItem>
-      ))}
-    </>
-  )
-}
-
 export default function Header({
   title,
 }: {
   title: string
 }) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
+  const currentUrl = usePathname();
+  const currentMenuName = currentUrl.charAt(1).toLocaleUpperCase() + currentUrl.slice(2);
 
   const onClickProfile = () => {
     router.push(URL_PROFILE);
@@ -76,19 +44,14 @@ export default function Header({
 
   return (
     <>
-      <Navbar onMenuOpenChange={setIsMenuOpen}>
-        <NavbarContent>
-          <NavbarMenuToggle
-            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-            className='sm:hidden'
-          />
-          <NavbarBrand>
-            <div className='font-bold text-inherit'>{title}</div>
-          </NavbarBrand>
-        </NavbarContent>
+    <Paper elevation={2}>
+      <Navbar>
+        <NavbarBrand className='gap-2'>
+          <LuGhost className='paper-icon-width paper-icon-height text-secondary-500' />
+        </NavbarBrand>
 
-        <NavbarContent className='hidden sm:flex gap-4' justify='center'>
-          <PageMenu pageMenuItems={pageMenuItems} />
+        <NavbarContent className='gap-4 sm:flex' justify='center'>
+          <div className='font-bold text-secondary-500'>{currentMenuName}</div>
         </NavbarContent>
 
         <NavbarContent as='div' justify='end'>
@@ -132,10 +95,8 @@ export default function Header({
           </Dropdown>
         </NavbarContent>
 
-        <NavbarMenu>
-          <PageMenu pageMenuItems={pageMenuItems} />
-        </NavbarMenu>
       </Navbar>
+      </Paper>
     </>
   );
 }

@@ -42,12 +42,11 @@ export default function ComponentPostInput({
         )
       }
     );
-    router.refresh();
   }
 
   return (
     <>
-      <Button onPress={onOpen} isIconOnly color='primary' className='sticky ml-auto bottom-5 right-5'>
+      <Button onPress={onOpen} isIconOnly color='primary'>
         <LuPlus className={`${iconHeight} ${iconWeight}`}></LuPlus>
       </Button>
 
