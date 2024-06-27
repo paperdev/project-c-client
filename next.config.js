@@ -17,7 +17,7 @@ const BASE_URL = 'prod' === process.env.SERVER_TYPE ? `https://${process.env.SER
 */
 const PROFILE_URL = 'https://raw.githubusercontent.com/paperdev/project-c/master/shared/data/json/profile.json';
 const CHAT_URL = 'https://raw.githubusercontent.com/paperdev/project-c/master/shared/data/json/chat.json';
-const POST_URL = 'https://raw.githubusercontent.com/paperdev/project-c/master/shared/data/json/content.json';
+const POST_URL = 'https://raw.githubusercontent.com/paperdev/project-c/master/shared/data/json/post.json';
 
 /* 
   NOTE: process.env.SERVER_TYPE

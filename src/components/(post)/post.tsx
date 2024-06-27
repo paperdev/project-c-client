@@ -17,6 +17,7 @@ export default function ComponentPost({
   const iconHeight = 'h-7';
   const maxNumber = 100;
 
+  const [recentPosts, setRecentPosts] = useState(dataPost);
   const [dataComments, setDataComments] = useState([]);
 
   const onClickComment = (event: React.MouseEvent, comments: iComment[]) => {
@@ -57,6 +58,19 @@ export default function ComponentPost({
       }
     );
 
+    let temp = Array.from(recentPosts);
+
+    const postIndex = temp.findIndex((post) => {
+      return post.id === parseInt(postId);
+    });
+
+    if (0 > postIndex || !temp[postIndex]) {
+      return;
+    }
+
+    temp[postIndex].likeCount++;
+    setRecentPosts(temp);
+
     divLikeButtonAni.classList.remove('invisible');
     divLikeButtonAni.classList.add('animate__animated', 'animate__fadeOutUp');
     divLikeButtonAni.addEventListener('animationend', () => {
@@ -65,11 +79,26 @@ export default function ComponentPost({
     });
   }
 
+  const onCommentReplied = (comment: iComment) => {
+    let temp = Array.from(recentPosts);
+
+    const postIndex = temp.findIndex((post) => {
+      return post.id === comment.postId;
+    });
+
+    if (0 > postIndex || !temp[postIndex]) {
+      return;
+    }
+
+    temp[postIndex].comments.push(comment);
+    setRecentPosts(temp);
+  }
+
   return (
     <>
       <div className='flex flex-col gap-1 pt-0.5 min-h-screen'>
         {
-          dataPost.map((post, index) => {
+          recentPosts.map((post, index) => {
             return (
               <Card key={index} data-postid={post.id} isBlurred shadow='none' >
 
@@ -119,12 +148,12 @@ export default function ComponentPost({
                   </div>
 
                   <div className='hidden p-6 commentListClass'>
-                    <ComponentComment postId={post.id} dataComments={dataComments}></ComponentComment>
+                    <ComponentComment postId={post.id} dataComments={dataComments} onCommentReplied={onCommentReplied}></ComponentComment>
                   </div>
                 </CardFooter>
 
                 {
-                  index !== (dataPost.length - 1) && <Divider className="my-2" />
+                  index !== (recentPosts.length - 1) && <Divider className="my-2" />
                 }
 
               </Card>
