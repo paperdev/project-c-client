@@ -48,6 +48,24 @@ export default function ComponentProfile({
               {dataProfile.jobTitle}
             </div>
 
+            <div className='flex cursor-pointer text-primary-500 mt-2' onClick={() => { copyText(dataProfile.email) }}>
+              <div className='flex space-x-2'>
+                <LuMail className='w-6 h-6' />
+                <div>{dataProfile.email}</div>
+              </div>
+
+              <Snackbar
+                open={isOpen}
+                autoHideDuration={delayTime}
+                onClose={onClose}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+              >
+                <Alert onClose={onClose} severity='success' variant='filled' >
+                  Email is copied!
+                </Alert>
+              </Snackbar>
+            </div>
+
             <div className='flex gap-2 mt-2 justify-center sm:justify-start'>
               <Link
                 showAnchorIcon
@@ -71,7 +89,7 @@ export default function ComponentProfile({
               >
               </Link>
 
-              <div className='cursor-pointer text-secondary' onClick={() => { copyText(dataProfile.email) }}>
+              {/* <div className='cursor-pointer text-secondary' onClick={() => { copyText(dataProfile.email) }}>
                 <LuMail className='w-6 h-6' />
               </div>
               <Snackbar
@@ -83,7 +101,7 @@ export default function ComponentProfile({
                 <Alert onClose={onClose} severity='success' variant='filled' >
                   Email is copied!
                 </Alert>
-              </Snackbar>
+              </Snackbar> */}
 
             </div>
 
