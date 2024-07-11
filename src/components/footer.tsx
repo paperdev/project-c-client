@@ -3,7 +3,7 @@
 import React from 'react';
 import { Tabs, Tab } from '@nextui-org/react';
 import Paper from '@mui/material/Paper';
-import { LuHome, LuMessagesSquare, LuAperture, LuBarChartBig } from 'react-icons/lu';
+import { LuHome, LuMessagesSquare, LuBarChartBig } from 'react-icons/lu';
 import { usePathname, useRouter } from 'next/navigation';
 
 // TODO:
@@ -18,10 +18,15 @@ const pageMenuItems = [
     href: 'chat',
     icon: <LuMessagesSquare />,
   },
+  // {
+  //   name: 'Post',
+  //   href: 'post',
+  //   icon: <LuAperture />,
+  // },
   {
-    name: 'Post',
-    href: 'post',
-    icon: <LuAperture />,
+    name: 'Trend',
+    href: 'trend',
+    icon: <LuBarChartBig />,
   },
   // {
   //   name: 'Stats',
