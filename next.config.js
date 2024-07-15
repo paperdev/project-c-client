@@ -48,6 +48,8 @@ const nextConfig = {
     POST_URL : postUrl,
     YOUTUBE_KEY: process.env.YOUTUBE_KEY,
     TRENDS_URL: process.env.TRENDS_URL,
+    APPSTORE_URL: process.env.APPSTORE_URL,
+    APPSTORE_ID: process.env.APPSTORE_ID,
   },
 
   distDir: 'build',
