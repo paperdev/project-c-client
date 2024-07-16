@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Avatar, Link } from '@nextui-org/react';
+import { Avatar, Link, Image } from '@nextui-org/react';
 import { LuGithub, LuMail, LuLinkedin } from 'react-icons/lu';
 import { iProfile } from '@/shared/interface/profile';
 import Snackbar from '@mui/material/Snackbar';
@@ -14,6 +14,18 @@ export default function ComponentProfile({
 }) {
   const delayTime = 2000;
   const [isOpen, setIsOpen] = useState(false);
+
+  let appIconStyle = {
+    overflow: 'hidden',
+    display: 'inline-block',
+    verticalAlign: 'middle',
+  }
+
+  let appDownloadStyle = {
+    borderRadius: '13px',
+    width: '250px',
+    height: '83px',
+  }
 
   const copyText = (text: string) => {
     navigator.clipboard.writeText(text);
@@ -105,6 +117,20 @@ export default function ComponentProfile({
 
             </div>
 
+            <div className='mt-2 flex space-x-4'>
+              <div className='w-10 h-10' style={appIconStyle}>
+                <Link isExternal href={process.env.APPSTORE_URL}>
+                    <Image src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/1d/10/cd/1d10cd7e-e417-45ca-e367-1b67c620c638/AppIcon-0-0-1x_U007ephone-0-0-0-0-85-220.png/540x540bb.jpg" alt="TrendInsight"/>
+                </Link>
+              </div>
+
+              <div style={appDownloadStyle}>
+                <Link isExternal href={process.env.APPSTORE_URL}>
+                  <Image src='https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1720742400' alt='Download on the App Store'/>
+                </Link>
+              </div>
+            </div>
+            
           </div>
         </div>
       </div>
